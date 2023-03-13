@@ -23,7 +23,7 @@ const Body = styled.div`
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 100%;
+    height: calc(100% - 100px); // 100px is the height of the app bar
     padding: 0 80px;
     background-color: white;
     overflow: auto;
