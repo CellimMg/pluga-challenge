@@ -2,10 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import logo from "../../../../../utils/assets/images/logo.png";
 import iconSearch from "../../../../../utils/assets/icons/icon_search.png";
-import { Link } from 'react-router-dom';
-
+import MenuButton from "../menu_button/menu_button";
 
 export default function AppBar() {
+
+    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
     const plugaSignIn: string = "https://manage.pluga.co/login";
     const plugaSignUp: string = "https://manage.pluga.co/#/signup?lang=pt_BR";
@@ -14,20 +15,31 @@ export default function AppBar() {
         window.open(url, "_blank");
     }
 
-    return (
-        <Bar>
-            <Row>
-                <a href="/"><Logo src={logo}></Logo></a>
-                <Search>
-                    <Input type="text" placeholder="Buscar mais de 80 ferramentas"></Input>
-                </Search>
-            </Row>
+    const handleMenuClick = () => {
+        setIsMenuOpen(!isMenuOpen);
+    }
 
-            <Row>
-                <ButtonSignIn onClick={() => redirectOnClick(plugaSignIn)}>ENTRAR</ButtonSignIn>
-                <ButtonSignUp onClick={() => redirectOnClick(plugaSignUp)}>CADASTRAR</ButtonSignUp>
-            </Row>
-        </Bar>
+    return (
+        <>
+            <Bar>
+                <Row>
+                    <a href="/"><Logo src={logo}></Logo></a>
+                    <Search>
+                        <Input type="text" placeholder="Buscar mais de 80 ferramentas"></Input>
+                    </Search>
+                </Row>
+
+                <RowButtons>
+                    <ButtonSignIn onClick={() => redirectOnClick(plugaSignIn)}>ENTRAR</ButtonSignIn>
+                    <ButtonSignUp onClick={() => redirectOnClick(plugaSignUp)}>CADASTRAR</ButtonSignUp>
+                </RowButtons>
+                <MenuButton onClick={handleMenuClick} isActive={isMenuOpen}/>
+            </Bar>
+            <Menu active={isMenuOpen}>
+                <ButtonSignIn activeMenu={isMenuOpen} onClick={() => redirectOnClick(plugaSignIn)}>ENTRAR</ButtonSignIn>
+                <ButtonSignUp activeMenu={isMenuOpen} onClick={() => redirectOnClick(plugaSignUp)}>CADASTRAR</ButtonSignUp>
+            </Menu>
+        </>
     );
 }
 
@@ -64,6 +76,10 @@ const Search = styled.div`
     background-position: 20px center;
     background-size: 20px;
     margin-left: 50px;
+    
+    @media (max-width: 768px) {
+        display: none;
+    }
 `;
 
 const Input = styled.input`
@@ -75,7 +91,9 @@ const Input = styled.input`
     font-size: 16px;
 `;
 
-const ButtonSignIn = styled.button`
+const ButtonSignIn = styled.button.attrs((props: { activeMenu: boolean }) => ({
+    activeMenu: props.activeMenu
+}))`
     width: 100px;
     height: 40px;
     border: solid 2px #5b7180;
@@ -87,9 +105,15 @@ const ButtonSignIn = styled.button`
     font-weight: bold;
     cursor: pointer;
     margin-right: 5px;
+    
+    @media (max-width: 900px) {
+        display: ${props => props.activeMenu ? "block" : "none"};
+    }
 `;
 
-const ButtonSignUp = styled.button`
+const ButtonSignUp = styled.button.attrs((props: { activeMenu: boolean }) => ({
+    activeMenu: props.activeMenu
+}))`
     width: 130px;
     height: 40px;
     border: none;
@@ -99,10 +123,41 @@ const ButtonSignUp = styled.button`
     font-size: 14px;
     font-weight: bold;
     cursor: pointer;
+    
+    @media (max-width: 900px) {
+        display: ${props => props.activeMenu ? "block" : "none"};
+    }
 `;
 
 const Row = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+`;
+
+const RowButtons = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    @media (max-width: 900px) {
+        display: none;
+    }
+`;
+
+const Menu = styled.div.attrs((props: { active: boolean }) => ({
+    active: props.active
+}))`
+    display: none;
+    height: ${props => props.active ? "150px" : "0"};
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    transition: height 0.2s;
+    
+    @media (min-width: 900px) {
+        display: none;
+    }
 `;
