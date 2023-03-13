@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import logo from "../../../../../utils/assets/images/logo.png";
 import iconSearch from "../../../../../utils/assets/icons/icon_search.png";
-import MenuButton from "../menu_button/menu_button";
+import MenuButton from "../menu_button";
 
 export default function AppBar() {
 
