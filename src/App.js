@@ -6,7 +6,7 @@ function App() {
         <>
             <GlobalStyle/>
 
-            <BaseScreen title={"Olá"}></BaseScreen>
+            <BaseScreen></BaseScreen>
         </>
     );
 }

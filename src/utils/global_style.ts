@@ -127,10 +127,10 @@ table {
 }
 html,
 body,
-.root {
+#root {
     width: 100%;
     height: 100%;
-    background-color: #333333;
+    background-color: #white;
     font-family: 'Lato', sans-serif;
 }
 *, span {
