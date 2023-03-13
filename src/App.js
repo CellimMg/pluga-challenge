@@ -1,30 +1,14 @@
-import logo from './logo.svg';
 import './App.css';
-import {GlobalStyle} from './utils/global_style.tsx';
-
+import {GlobalStyle} from './utils/global_style.ts';
+import BaseScreen from "./presentation/commom/base_screen";
 function App() {
-  return (
-    <>
-      <GlobalStyle />
+    return (
+        <>
+            <GlobalStyle/>
 
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    </>
-  );
+            <BaseScreen title={"Olá"}></BaseScreen>
+        </>
+    );
 }
 
 export default App;
