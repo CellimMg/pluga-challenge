@@ -24,9 +24,6 @@ export default function AppBar() {
             <Bar>
                 <Row>
                     <a href="/"><Logo src={logo}></Logo></a>
-                    <Search>
-                        <Input type="text" placeholder="Buscar mais de 80 ferramentas"></Input>
-                    </Search>
                 </Row>
 
                 <RowButtons>
