@@ -2,10 +2,10 @@ export class Tool {
     id: string;
     name: string;
     color: string;
-    icon: number;
-    link: number;
+    icon: string;
+    link: string;
 
-    constructor(id: string, name: string, color: string, icon: number, link: number) {
+    constructor(id: string, name: string, color: string, icon: string, link: string) {
         this.id = id;
         this.name = name;
         this.color = color;
@@ -14,7 +14,7 @@ export class Tool {
     }
 
     static fromJson(json: any): Tool {
-        const tool = new Tool(json.id, json.name, json.color, json.icon, json.link);
+        const tool = new Tool(json.app_id, json.name, json.color, json.icon, json.link);
         return tool;
     }
 }
